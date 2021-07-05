@@ -4,6 +4,7 @@ import TodoFeature from './Features/Todo';
 import AlbumFeature from './Features/AlbumMusic';
 import StateExcercise from './Features/StateExcercise';
 import { Route, Link, NavLink, Switch, Redirect } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 function App() {
 
@@ -57,6 +58,9 @@ function App() {
 
           <Route path="/StateExvercise" component={StateExcercise} />
           {/* <StateExcercise /> */}
+
+          {/* TẠO RA 1 ROUTE NOT FOUND KHI KHÔNG TÌM THẤY DƯỜNG DẪN */}
+          <Route component={NotFound} />
         </Switch>
 
       </header>

@@ -1,6 +1,7 @@
 // sử dụng snippet => rsfp để tạo cho nhanh
 import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import NotFound from '../../components/NotFound';
 import DetailPage from './pages/DetailPage';
 // import PropTypes from 'prop-types';
 import ListPage from './pages/ListPage';
@@ -21,8 +22,11 @@ function TodoFeature(props) {
 
         <div>
             <Switch>
-                <Route path={match.path} component={ListPage} />
-                <Route path={`${match.path}/:todoID`} component={DetailPage} />
+                <Route path={match.path} component={ListPage} exact />
+                <Route path={`${match.path}/:todoID`} component={DetailPage} exact />
+
+                {/* TẠO RA 1 ROUTE NOT FOUND KHI KHÔNG TÌM THẤY DƯỜNG DẪN */}
+                <Route component={NotFound} />
             </Switch>
 
         </div>
