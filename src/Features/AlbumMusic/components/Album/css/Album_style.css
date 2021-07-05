@@ -1,0 +1,13 @@
+.album {
+  max-width: 200px;
+}
+
+.album__thumbnail > img {
+  width: 100%;
+  border-radius: .5rem;
+}
+
+.album__title {
+  font-weight: bold;
+}
+/*# sourceMappingURL=Album_style.css.map */

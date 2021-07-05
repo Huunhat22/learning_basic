@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAA;EACN,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY;EAC7B,SAAS,EAAC,MAAM;EAChB,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;CAIb;;AATD,AAMI,UANM,GAMJ,EAAE,CAAA;EACA,UAAU,EAAE,IAAI;CACnB",
+    "sources": [
+        "Albumlist_style.scss"
+    ],
+    "names": [],
+    "file": "Albumlist_style.css"
+}

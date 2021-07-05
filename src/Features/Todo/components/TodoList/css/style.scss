@@ -1,0 +1,13 @@
+.todo-list{
+
+    & > li.completed{
+        color: gray;
+        font-style: italic;
+        text-decoration:red line-through;
+        
+    }
+}
+
+.todo-item{
+    cursor: pointer;
+}

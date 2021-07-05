@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAA;EACF,SAAS,EAAE,KAAK;CAWnB;;AAVI,AACE,iBADS,GACP,GAAG,CAAA;EACD,KAAK,EAAE,IAAI;EACX,aAAa,EAAE,KAAK;CACvB;;AAGH,AAAD,aAAQ,CAAA;EACJ,WAAW,EAAE,IAAI;CACpB",
+    "sources": [
+        "Album_style.scss"
+    ],
+    "names": [],
+    "file": "Album_style.css"
+}

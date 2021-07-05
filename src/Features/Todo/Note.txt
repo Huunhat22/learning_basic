@@ -1,0 +1,9 @@
+
+Feature Todo này có 2 version.
+
+# version 1. => ở mức độ cơ bản, chỉ có sử dụng Props
+
+# version 1.2 => sẽ thêm chức năng thay đổi status của item.
+có sử dụng Props , State
+
+# sử dụng Nested Routing => component TodoFeature được sử dụng để làm nơi khai báo các path cho các page con

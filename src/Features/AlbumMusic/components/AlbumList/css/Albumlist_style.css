@@ -1,0 +1,16 @@
+.albumlist {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.albumlist > li {
+  list-style: none;
+}
+/*# sourceMappingURL=Albumlist_style.css.map */

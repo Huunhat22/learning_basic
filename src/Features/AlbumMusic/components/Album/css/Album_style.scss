@@ -1,0 +1,13 @@
+.album{
+    max-width: 200px;;
+    &__thumbnail{
+       > img{
+           width: 100%;
+           border-radius: .5rem;
+       }
+    }
+
+    &__title{
+        font-weight: bold;
+    }
+}

@@ -1,0 +1,11 @@
+.todo-list > li.completed {
+  color: gray;
+  font-style: italic;
+  -webkit-text-decoration: red line-through;
+          text-decoration: red line-through;
+}
+
+.todo-item {
+  cursor: pointer;
+}
+/*# sourceMappingURL=style.css.map */
