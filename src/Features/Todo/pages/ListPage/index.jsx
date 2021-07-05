@@ -1,6 +1,6 @@
 // sử dụng snippet => rsfp để tạo cho nhanh
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import TodoList from '../../components/TodoList';
 import querString from 'query-string';
@@ -30,15 +30,30 @@ function ListPage(props) {
     ];
 
     const location = useLocation();
+    const history = useHistory();
+    const match = useRouteMatch();
+
     const [todoList, setTodoList] = useState(inittodoList);
 
-    // Bài 49 : Sync filters to URL params
+    /*  Bài 49 : Sync filters to URL params
+        Để lấy được filter param thì phải có thông tin của location, window.location.sreach trong console log
+        trong location có sreach => mình sẽ parse object param nó ra
+    */
     const [filteredStatus, SetfilteredStatus] = useState(() => {
-        // để lấy được filter param thì phải có thông tin của location, trong location có sreach => mình sẽ parse object param nó ra
         const params = querString.parse(location.search);
         // console.log(params);
         return params.status || 'all';
     });
+
+
+    /*  Bài 50: Sync state to URL
+        tạo ra 1 useEffect(), và truyền cho nó 1 tham số(Dependence)
+        mỗi khi location thay đổi thì mình phải cập nhật lại State bằng cái [location.sreach]
+    */
+    useEffect(() => {
+        const params = querString.parse(location.search);
+        SetfilteredStatus(params.status || 'all');
+    }, [location.search]);
 
     const handleTodoClick = (todo, index) => {
         // console.log(todo, index);
@@ -56,16 +71,43 @@ function ListPage(props) {
     }
 
     // filter
+
+    /*  Bài 50 : Sync state to URL
+        Update url param
+        Listen to location sreach
+        --> khi location thay đổi thì sẽ update State 
+        sau đó mình sẽ tạo 1 useEffect() --> nó sẽ giúp mình listen lên location sreach
+    */
     const handleShowAllStatus = () => {
-        SetfilteredStatus('all')
+        // SetfilteredStatus('all')
+        /* 
+            mỗi khi click thì sẽ tạo ra 1 queryParams mới
+            sau đó dùng history sẽ push 1 object 2 tham số, gồm pathName hiện tại, và
+        */
+        const queryParams = { status: 'all' };
+        history.push({
+            pathname: match.path,
+            search: querString.stringify(queryParams),
+        });
+
     }
 
     const handleShowAllNew = () => {
-        SetfilteredStatus('new')
+        // SetfilteredStatus('new')
+        const queryParams = { status: 'new' };
+        history.push({
+            pathname: match.path,
+            search: querString.stringify(queryParams),
+        });
     }
 
     const handleShowAllComplete = () => {
-        SetfilteredStatus('completed')
+        // SetfilteredStatus('completed')
+        const queryParams = { status: 'completed' };
+        history.push({
+            pathname: match.path,
+            search: querString.stringify(queryParams),
+        });
     }
 
     // tạo 1 hằng số sẽ là state sau khi đã được filter
