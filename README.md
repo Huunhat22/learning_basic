@@ -1,9 +1,21 @@
-# KHÓA HỌC CƠ BẢN VỀ REACT JS - EASY_FE (ANH HẬU)
+# KHÓA HỌC CƠ BẢN VỀ REACT JS - EASY_FE
+
 # khi clone code về thì phải cài thêm các package để chạy.
 
 npm install -> cài đặt package bắt buộc
-npm i --save react-router-dom -> cài đặt package router
 
+# Các package đã cài trong project
+
+npm i --save react-router-dom -> cài đặt package router
+npm install @material-ui/core --save -> cài đặt thư viện material UI
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" /> -> patse này vào trong file Index
+
+with npm
+npm install @material-ui/icons --save -> cài đặt Material Icons
+
+with yarn
+yarn add @material-ui/icons -> cài đặt Material Icons
 
 # Getting Started with Create React App
 
