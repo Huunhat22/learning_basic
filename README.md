@@ -17,6 +17,9 @@ npm install @material-ui/icons --save -> cài đặt Material Icons
 with yarn
 yarn add @material-ui/icons -> cài đặt Material Icons
 
+Cài đặt modul Axios
+npm install axios --save
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

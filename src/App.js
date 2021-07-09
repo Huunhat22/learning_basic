@@ -1,10 +1,12 @@
 // import logo from './logo.svg';
 // import './App.css';
+import {useEffect} from 'react';
 import TodoFeature from './Features/Todo';
 import AlbumFeature from './Features/AlbumMusic';
 import StateExcercise from './Features/StateExcercise';
 import { Route, Link, NavLink, Switch, Redirect } from 'react-router-dom';
 import NotFound from './components/NotFound';
+import productApi from './api/productApi';
 
 function App() {
 
@@ -13,6 +15,18 @@ function App() {
   const age = 26;
   const gender = true;
   const myhobbys = ['coding', 'reading', 'runing', 'eat'];
+
+
+  //Bài 58 : Demo gọi API lấy dữ liệu
+  // cách gọi Api thì sử dụng Effect -> ở ví dụ này chỉ muốn load 1 lần duy nhất thì truyền dependence rỗng
+  useEffect(() => {
+    const fetchProducts = async () =>{
+      const params = {_limit : 10,};  // yêu cầu chỉ lấy ra 10 record
+      const productList = await productApi.getAll(params);
+      console.log(productList);
+    };
+    fetchProducts();
+  }, []);
 
   return (
     <div className="App">
