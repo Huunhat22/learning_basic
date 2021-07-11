@@ -1,9 +1,11 @@
 // sử dụng snippet => rsfp để tạo cho nhanh
-import React, { useState, useEffect } from 'react';
+import querString from 'query-string';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
+import TodoForm from '../../components/TodoForm';
+
 // import PropTypes from 'prop-types';
 import TodoList from '../../components/TodoList';
-import querString from 'query-string';
 
 ListPage.propTypes = {
 
@@ -113,9 +115,26 @@ function ListPage(props) {
     // tạo 1 hằng số sẽ là state sau khi đã được filter
     const renderedTodoList = todoList.filter(todo => filteredStatus === 'all' || filteredStatus === todo.status);
 
+    // Bai : 63 Cai dat todoform
+    const handleTodoFormSubmit = (values) =>{
+        //console.log('Form submit : ', values);
+        // tạo ra 1 todo giả định có vaule nhập vào từ input
+        const newTodo = {
+            id: todoList.length +1,
+            title: values.title,
+            status : 'new',            
+        }
+
+        const newTodoList = [...todoList,newTodo];
+        setTodoList(newTodoList);
+
+    };
+
     return (
 
         <div>
+            <h3>Todo Form</h3>
+            <TodoForm onSubmit={handleTodoFormSubmit}/>
             <TodoList todoList={renderedTodoList} onItemClick={handleTodoClick} />
             <div>
                 <button onClick={handleShowAllStatus}>Show All Status</button>
