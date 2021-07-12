@@ -14,6 +14,6 @@ const counterSlice = createSlice({
     },
 });
 
-const {action,reducer} = counterSlice;
-export const {increase,decrease} = action; //định nghĩa bằng name export
+const {actions,reducer} = counterSlice;
+export const {increase,decrease} = actions; //định nghĩa bằng name export
 export default reducer; // default export

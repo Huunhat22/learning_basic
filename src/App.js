@@ -1,12 +1,13 @@
 // import logo from './logo.svg';
 // import './App.css';
-import {useEffect} from 'react';
-import TodoFeature from './Features/Todo';
-import AlbumFeature from './Features/AlbumMusic';
-import StateExcercise from './Features/StateExcercise';
-import { Route, Link, NavLink, Switch, Redirect } from 'react-router-dom';
-import NotFound from './components/NotFound';
+import { useEffect } from 'react';
+import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
 import productApi from './api/productApi';
+import NotFound from './components/NotFound';
+import AlbumFeature from './Features/AlbumMusic';
+import CounterFeature from './Features/Counter';
+import StateExcercise from './Features/StateExcercise';
+import TodoFeature from './Features/Todo';
 
 function App() {
 
@@ -61,7 +62,7 @@ function App() {
           <Redirect from="/from-binh-duong" to="/" exact />
 
           {/* Noded : Route matching */}
-          <Route path="/" component={TodoFeature} exact />
+          <Route path="/" component={CounterFeature} exact />
           <Route path="/Todo" component={TodoFeature} />
           {/* <TodoFeature></TodoFeature> */}
 
