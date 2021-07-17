@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
 // import './App.css';
+import Header from 'components/Header';
 import { useEffect } from 'react';
 import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
 import productApi from './api/productApi';
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <header className="App-header">
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h3> {firstName} {lastName} - {age} - {gender ? 'Nam' : 'Nữ'}</h3>
@@ -49,9 +51,7 @@ function App() {
         <p><Link to="/StateExvercise">State Exvercise</Link></p>
 
         {/* Sử dung NavLink */}
-        <p><NavLink to="/Todo">To do list</NavLink></p>
-        <p><NavLink to="/AlbumMusic">Album Music</NavLink></p>
-        <p><NavLink to="/StateExvercise">State Exvercise</NavLink></p>
+        
 
 
         {/* Noted : sử dụng Switch và route matching  */}
