@@ -46,9 +46,9 @@ function App() {
         </ul>
 
         {/* sử dụng Link  */}
-        <p><Link to="/Todo">To do list</Link></p>
+        {/* <p><Link to="/Todo">To do list</Link></p>
         <p><Link to="/AlbumMusic">Album Music</Link></p>
-        <p><Link to="/StateExvercise">State Exvercise</Link></p>
+        <p><Link to="/StateExvercise">State Exvercise</Link></p> */}
 
         {/* Sử dung NavLink */}
         
