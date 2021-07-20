@@ -2,7 +2,7 @@
 // import './App.css';
 import Header from 'components/Header';
 import { useEffect } from 'react';
-import { Link, NavLink, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import productApi from './api/productApi';
 import NotFound from './components/NotFound';
 import AlbumFeature from './Features/AlbumMusic';
