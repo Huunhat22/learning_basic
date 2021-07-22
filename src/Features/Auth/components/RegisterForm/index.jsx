@@ -43,12 +43,19 @@ function RegisterForm(props) {
     const schema = yup.object().shape({
        fullName : yup
         .string()
-        .required('Please enter your full name')
-        .test('should has at least two words','Please enter at least two words.',(value) =>{
+        .required('Please enter your full name.')
+        .test('should has at least two words.','Please enter at least two words.',(value) =>{
             // hàm test này tự định nghĩa để thêm chức năng mong muốn
             // console.log('value', value);
             return value.split(' ').length >= 2
-        } )
+        } ),
+
+        // validate textfield Email
+        email: yup.string().required('Please enter your email address.').email('Please enter an valid email.'),
+
+        // validate password field
+        password: yup.string().required('Please enter your password.').min(6,'Please enter at least six words.'),
+
       });
 
     //định nghĩa form
