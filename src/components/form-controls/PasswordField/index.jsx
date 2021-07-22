@@ -1,3 +1,4 @@
+import { FormHelperText } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -37,6 +38,7 @@ function PasswordField(props) {
                 name={name}
                 control={control}
                 render={({field : {onChange,onBlur,value,name},fieldState: {invalid,error}}) =>(
+                    <>
                     <FormControl fullWidth variant="outlined" margin="normal">
                         <InputLabel >{label}</InputLabel>
                         <OutlinedInput
@@ -61,6 +63,9 @@ function PasswordField(props) {
                             onBlur = {onBlur}
                     />
                     </FormControl>
+                    {/* Lưu ý khi validate cho password file phải thêm FormHelperText */}
+                    <FormHelperText error={invalid}>{error?.message}</FormHelperText>
+                    </>
                 )}   
             ></Controller>    
 
