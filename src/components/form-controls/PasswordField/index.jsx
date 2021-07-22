@@ -39,7 +39,7 @@ function PasswordField(props) {
                 control={control}
                 render={({field : {onChange,onBlur,value,name},fieldState: {invalid,error}}) =>(
                     <>
-                    <FormControl fullWidth variant="outlined" margin="normal">
+                    <FormControl error={invalid} fullWidth variant="outlined" margin="normal">
                         <InputLabel >{label}</InputLabel>
                         <OutlinedInput
                             id={name}
