@@ -56,6 +56,10 @@ function RegisterForm(props) {
         // validate password field
         password: yup.string().required('Please enter your password.').min(6,'Please enter at least six words.'),
 
+        // validate retypePassword field
+        // oneOf -> sẽ là một trong những giá trị định nghĩa trong mảng,
+        // ref -> giá trị phải giống như field cần chỉ định. -> nếu không match thì sẽ báo lỗi
+        retypePassword: yup.string().required('Please retype password again.').oneOf([yup.ref('password')],'Password does not match.')
       });
 
     //định nghĩa form
