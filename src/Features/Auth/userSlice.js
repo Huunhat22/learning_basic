@@ -2,7 +2,8 @@ import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import userApi from "api/userApi";
 
 // First, create the thunk -> sử dụng Redux toolkit ThunkApi 
-const register = createAsyncThunk('users/register',async (payload) => {
+// Bài 97 : export register ra để sử dụng
+export const register = createAsyncThunk('users/register',async (payload) => {
         const data = await userApi.register(payload); 
       // call api to register
 
