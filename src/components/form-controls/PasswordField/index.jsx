@@ -57,7 +57,7 @@ function PasswordField(props) {
                                 </IconButton>
                             </InputAdornment>
                             }
-                            labelWidth={70}
+                            
                             value = {value}
                             onChange = {onChange}
                             onBlur = {onBlur}
