@@ -69,7 +69,7 @@ export default function Header() {
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" disableEscapeKeyDown>
               <DialogContent>
-                <Register />
+                <Register colseDialog={handleClose}/>
               </DialogContent>
 
               <DialogActions>
