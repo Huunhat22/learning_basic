@@ -42,6 +42,7 @@ function Register(props) {
 
         } catch (error) {
             console.log('failded to register', error);
+            enqueueSnackbar(error.message, {variant:'error'});
         }
         
     }
