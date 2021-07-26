@@ -88,7 +88,7 @@ function RegisterForm(props) {
         }
 
         // reset form sau khi submit
-        form.reset();
+        // form.reset();
     }
 
     // Bài : 99 hiển thị loading khi submit form
@@ -103,7 +103,7 @@ function RegisterForm(props) {
             <Avatar className={classes.avatar}>
                 <LockOutlined></LockOutlined>
             </Avatar>
-            
+
             <Typography className={classes.title} component="h3" variant="h6">
                 Create An Account
             </Typography>
