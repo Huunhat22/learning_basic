@@ -1,6 +1,8 @@
 // import logo from './logo.svg';
 // import './App.css';
+import { Button } from '@material-ui/core';
 import Header from 'components/Header';
+import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import productApi from './api/productApi';
@@ -30,10 +32,16 @@ function App() {
     fetchProducts();
   }, []);
 
+  const {enqueueSnackbar} = useSnackbar();
+  const showNoti = ()=>{
+    enqueueSnackbar('Register successfully', {variant:'success'});
+  }
+
   return (
     <div className="App">
       <Header />
       <header className="App-header">
+        <Button onClick={showNoti}>show notiStack</Button>
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <h3> {firstName} {lastName} - {age} - {gender ? 'Nam' : 'Nữ'}</h3>
         <ul>
