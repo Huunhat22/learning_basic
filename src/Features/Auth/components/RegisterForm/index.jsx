@@ -5,12 +5,13 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import InputField from 'components/form-controls/InputField';
-import { Avatar, Button, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Button, makeStyles, Typography, LinearProgress } from '@material-ui/core';
 import { LockOutlined, } from '@material-ui/icons';
 import PasswordField from 'components/form-controls/PasswordField';
 
 const useStyles = makeStyles ((theme) =>({
     root :{
+        position:'relative',
         padding: theme.spacing(3),
     },
 
@@ -28,7 +29,12 @@ const useStyles = makeStyles ((theme) =>({
         margin: theme.spacing(2,0),
     },
 
-
+    progress:{
+        position: 'absolute',
+        top: theme.spacing(1),
+        left: 0,
+        right: 0
+    }
 }))
 
 RegisterForm.propTypes = {
@@ -77,20 +83,27 @@ function RegisterForm(props) {
     const handleSubmit = async (values)=>{
         const {onSubmit} = props;
         if (onSubmit) {
-            onSubmit(values)
+            //B99: thêm await -> đợi hàm này chạy xong 
+           await onSubmit(values)
         }
 
         // reset form sau khi submit
         form.reset();
     }
 
+    // Bài : 99 hiển thị loading khi submit form
+    const {isSubmitting} = form.formState;
 
     return (
         
         <div className={classes.root}>
+            {/* B99 đang submitting thì show LinearProgress*/}
+            {isSubmitting && <LinearProgress  className={classes.progress} />}
+
             <Avatar className={classes.avatar}>
                 <LockOutlined></LockOutlined>
             </Avatar>
+            
             <Typography className={classes.title} component="h3" variant="h6">
                 Create An Account
             </Typography>
@@ -100,7 +113,9 @@ function RegisterForm(props) {
                 <InputField name="email" label="Email" form={form}/>
                 <PasswordField name="password" label="Password" form={form}/>
                 <PasswordField name="retypePassword" label="Retype Password" form={form}/>
-                <Button type="submit" className={classes.submit} variant="contained" color="primary" fullWidth> Create an Account</Button>
+
+                {/* trong lúc submit form thì sẽ disable nút submit */}
+                <Button type="submit" disabled={isSubmitting} className={classes.submit} variant="contained" color="primary" fullWidth> Create an Account</Button>
             </form>
         </div>
     );
