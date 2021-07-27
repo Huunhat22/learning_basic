@@ -1,3 +1,4 @@
+import { IconButton } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -6,6 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { Close } from '@material-ui/icons';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Register from 'Features/Auth/components/Register';
 import React, { useState } from 'react';
@@ -13,6 +15,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    position: 'relative',
     flexGrow: 1,
   },
   menuButton: {
@@ -24,6 +27,14 @@ const useStyles = makeStyles((theme) => ({
   link:{
     color: '#fff',
     textDecoration: 'none',
+  },
+
+  closeButton:{
+    position:'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
+    color: theme.palette.grey[500],
+    zIndex: 1,
   }
 }));
 
@@ -68,15 +79,19 @@ export default function Header() {
             <Button color="inherit" onClick={handleClickOpen}>Register</Button>
 
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" disableEscapeKeyDown>
+              <IconButton className={classes.closeButton} onClick={handleClose}>
+                <Close />
+              </IconButton>
+
               <DialogContent>
                 <Register colseDialog={handleClose}/>
               </DialogContent>
 
-              <DialogActions>
+              {/* <DialogActions>
                 <Button onClick={handleClose} color="primary">
                   Cancel
                 </Button>
-              </DialogActions>
+              </DialogActions> */}
             </Dialog>
           
         </Toolbar>
