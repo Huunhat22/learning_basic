@@ -1,5 +1,6 @@
 import { createAsyncThunk,createSlice } from "@reduxjs/toolkit";
 import userApi from "api/userApi";
+import StorageKeys from "constants/storage-keys";
 
 // First, create the thunk -> sử dụng Redux toolkit ThunkApi 
 // Bài 97 : export register ra để sử dụng
@@ -8,8 +9,9 @@ export const register = createAsyncThunk('users/register',async (payload) => {
       // call api to register
 
       // save data to localStorage
-        localStorage.setItem('access_token', data.jwt);
-        localStorage.setItem('user', JSON.stringify(data.user));
+      // Bài 107: thay đổi access_token và user bằng hằng số đã được định nghĩa
+        localStorage.setItem(StorageKeys.TOKEN, data.jwt);
+        localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
 
       return data.user;
     }
@@ -21,8 +23,9 @@ export const login = createAsyncThunk('users/login',async (payload) => {
       // call api to register
 
       // save data to localStorage
-        localStorage.setItem('access_token', data.jwt);
-        localStorage.setItem('user', JSON.stringify(data.user));
+      // Bài 107: thay đổi access_token và user bằng hằng số đã được định nghĩa
+        localStorage.setItem(StorageKeys.TOKEN, data.jwt);
+        localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));
 
       return data.user;
     }
