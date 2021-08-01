@@ -9,6 +9,12 @@ const userApi = {
         return axiosClient.post(url,data);
     },
 
+    // setup cho chức năng login
+    login(data){
+        const url = '/auth/local';
+        return axiosClient.post(url,data);
+    },
+
 };
 
 export default userApi;
