@@ -30,13 +30,16 @@ axiosClient.interceptors.response.use(function (response) {
 
     //Bài: 102 lấy thông tin error khi đăng kí thất bại
     const{config,status,data} = error.response;
-    if (config.url === '/auth/local/register' && status === 400) {
+
+    //Bài 105: tạo một hằng số URL, xác định trường hợp đăng kí hay đăng nhập, Nếu url.config mà có trong URL thì sẽ parse lỗi tương ứng
+    const URLS =['/auth/local/register','/auth/local'];
+    if ( URLS.includes(config.url) && status === 400) {
 
       //lấy ra error message trong respon
-      const errorList = data.data || [];
-      const firstError = errorList.Length > 0 ? errorList[0] : {};
-      const messageList = firstError.messages || [];
-      const firstMessage = messageList.Length > 0 ? messageList[0] : {};
+      const errorList = data.data || []
+      const firstError = errorList.length > 0 ? errorList[0] : {}
+      const messageList = firstError.messages || []
+      const firstMessage = messageList.length > 0 ? messageList[0] : {}
 
       throw new Error(firstMessage.message);
     }
