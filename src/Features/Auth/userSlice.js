@@ -38,7 +38,16 @@ const userSlice = createSlice({
         current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
         settings: {},
     },
-    reducers: {},
+    reducers: {
+      // Bài 101: tạo 1 action logout
+      logout(state){
+        //1 mình phải xóa token và user trên localStorage
+        localStorage.removeItem(StorageKeys.TOKEN);
+        localStorage.removeItem(StorageKeys.USER);
+        //2 set cái current state về rỗng
+        state.current = {};
+      }
+    },
     extraReducers: {
         // action type mình tự định nghĩa
         // ý nghĩa của dòng bên dưới : user/register/fullfilled
@@ -54,6 +63,6 @@ const userSlice = createSlice({
 
 });
 
-const {reducer} = userSlice;
- 
+const {actions,reducer} = userSlice;
+export const {logout} = actions;
 export default reducer; // default export
