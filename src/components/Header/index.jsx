@@ -88,6 +88,8 @@ export default function Header() {
     // do đã export từ userSlice
     const action = logout();
     dispatch(action);
+
+    setAnchorEl(null);
   }
   return (
     <div className={classes.root}>
