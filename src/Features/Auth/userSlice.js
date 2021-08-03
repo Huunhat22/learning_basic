@@ -51,12 +51,12 @@ const userSlice = createSlice({
     extraReducers: {
         // action type mình tự định nghĩa
         // ý nghĩa của dòng bên dưới : user/register/fullfilled
-        [register.fullfilled] : (state, action)=>{
+        [register.fulfilled] : (state, action)=>{
             state.current = action.payload;
         },
 
         // Bài 104: setup cho login
-        [login.fullfilled] : (state, action)=>{
+        [login.fulfilled] : (state, action)=>{
             state.current = action.payload;
         },
     }
