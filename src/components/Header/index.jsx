@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@material-ui/core';
+import { Box, IconButton, MenuItem,Menu } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -7,11 +7,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { Close } from '@material-ui/icons';
+import { AccountCircle, Close } from '@material-ui/icons';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Login from 'Features/Auth/components/Login';
 import Register from 'Features/Auth/components/Register';
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -46,10 +47,17 @@ const useStyles = makeStyles((theme) => ({
   };
 
 export default function Header() {
+  // Bài 109: Tạo loggedInUser để nhận biết đã đăng nhập hay chưa
+  const loggedInUser = useSelector(state => state.user.current)
+  const isLoggedIn = !!loggedInUser.id;
+
   // Bài 106: tạo State để phân biệt khi nào là đăng nhập,đang kí
   const [mode, setMode] = useState(MODE.LOGIN);
-  const classes = useStyles();
 
+  // Bài 110: Tạo state cho anchorEl
+  const [anchorEl, setAnchorEl] = useState(null); 
+
+  const classes = useStyles();
   const [open, setOpen] =useState(false);
 
 
@@ -60,6 +68,16 @@ export default function Header() {
   const handleClose = (e,reason) => {
     if (reason === 'backdropClick') return;
     setOpen(false);
+  };
+
+  // thêm hàm handleUserClick
+  const handleUserClick = (e) =>{
+    setAnchorEl(e.currentTarget);
+  };
+
+  // Bài 109: thêm hàm handleCloseMenu
+  const handleCloseMenu = ()=>{
+    setAnchorEl(null);
   };
 
   return (
@@ -85,11 +103,42 @@ export default function Header() {
               <Button color="inherit">State Exvercise</Button>
             </NavLink>
             
-            <Button color="inherit" onClick={handleClickOpen}>Register</Button>
+            {/* Bài 109: hiển thị tùy chỉnh khi đang nhập đăng kí, Nếu chưa đăng nhập !isLoggedIn thì hiển thị Login*/}
+            {!isLoggedIn && (
+              <Button color="inherit" onClick={handleClickOpen}>Login</Button>
+            )} 
+
+            {/* Bài 109: hiển thị tùy chỉnh khi đang nhập đăng kí, Nếu đã isLoggedIn thì hiển thị */}
+            {isLoggedIn && (
+              <IconButton color="inherit" onClick={handleUserClick}>
+                <AccountCircle />
+              </IconButton>
+            )} 
 
         </Toolbar>
       </AppBar>
 
+      {/* Bài 110: thêm menu khi click vào iconUser */}
+      <Menu
+        keepMounted
+        anchorEl={anchorEl}
+        // nếu có giá trị thị là true, còn không thì là false
+        open={Boolean(anchorEl)}
+        onClose={handleCloseMenu}
+        // tùy chỉnh vị trí menu xuất hiện
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        getContentAnchorEl={null}
+      >
+        <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+        <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+      </Menu>
       {/* Khi nhấn vào button Login thì sẽ show ra dialog này */}
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" disableEscapeKeyDown>
           <IconButton className={classes.closeButton} onClick={handleClose}>
