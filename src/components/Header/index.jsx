@@ -11,8 +11,9 @@ import { AccountCircle, Close } from '@material-ui/icons';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import Login from 'Features/Auth/components/Login';
 import Register from 'Features/Auth/components/Register';
+import { logout } from 'Features/Auth/userSlice';
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
   };
 
 export default function Header() {
+  // Bài 110: thêm dispatch cho hàm logout
+  const dispatch = useDispatch();
   // Bài 109: Tạo loggedInUser để nhận biết đã đăng nhập hay chưa
   const loggedInUser = useSelector(state => state.user.current)
   const isLoggedIn = !!loggedInUser.id;
@@ -80,6 +83,12 @@ export default function Header() {
     setAnchorEl(null);
   };
 
+  // Bài 101: thêm hàm handlelogoutClick
+  const handlelogoutClick = ()=>{
+    // do đã export từ userSlice
+    const action = logout();
+    dispatch(action);
+  }
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -137,7 +146,7 @@ export default function Header() {
         getContentAnchorEl={null}
       >
         <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-        <MenuItem onClick={handleCloseMenu}>Logout</MenuItem>
+        <MenuItem onClick={handlelogoutClick}>Logout</MenuItem>
       </Menu>
       {/* Khi nhấn vào button Login thì sẽ show ra dialog này */}
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" disableEscapeKeyDown>
