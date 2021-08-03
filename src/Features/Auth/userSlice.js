@@ -4,7 +4,7 @@ import StorageKeys from "constants/storage-keys";
 
 // First, create the thunk -> sử dụng Redux toolkit ThunkApi 
 // Bài 97 : export register ra để sử dụng
-export const register = createAsyncThunk('users/register',async (payload) => {
+export const register = createAsyncThunk('user/register',async (payload) => {
         const data = await userApi.register(payload); 
       // call api to register
 
@@ -18,7 +18,7 @@ export const register = createAsyncThunk('users/register',async (payload) => {
   )
 
   // Bài 105: setup cho chức năng login 
-export const login = createAsyncThunk('users/login',async (payload) => {
+export const login = createAsyncThunk('user/login',async (payload) => {
         const data = await userApi.login(payload); 
       // call api to register
 
@@ -34,7 +34,8 @@ export const login = createAsyncThunk('users/login',async (payload) => {
 const userSlice = createSlice({
     name : 'user',
     initialState : {
-        current: {},
+        //Bài 108: tạo redux state từ local Storage
+        current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {},
         settings: {},
     },
     reducers: {},

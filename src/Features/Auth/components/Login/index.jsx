@@ -8,7 +8,7 @@ import LoginForm from '../LoginForm';
 
 Login.propTypes = {
     //bài 101 : thêm 1 prop là function để tắt dialog
-    colseDialog: PropTypes.func,
+    closeDialog: PropTypes.func,
 };
 
 function Login(props) {
@@ -24,12 +24,12 @@ function Login(props) {
             // tạo 1 action là login được lấy từ userSlice
             const action = login(values);
             const resultAction = await dispatch(action);
-            const user = unwrapResult(resultAction);
+            unwrapResult(resultAction);
 
             //bài:101 close dialog
-            const {colseDialog} = props;
-            if (colseDialog) {
-                colseDialog();
+            const {closeDialog} = props;
+            if (closeDialog) {
+                closeDialog();
             }
 
             // // do something when user submit
