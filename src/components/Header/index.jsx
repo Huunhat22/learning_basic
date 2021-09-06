@@ -69,8 +69,8 @@ export default function Header() {
   };
 
   const handleClose = (e,reason) => {
-    if (reason === 'backdropClick') return;
-    setOpen(false);
+    if(reason === 'backdropClick') return;    
+        setOpen(false);
   };
 
   // thêm hàm handleUserClick
