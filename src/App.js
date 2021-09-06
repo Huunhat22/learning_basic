@@ -2,6 +2,7 @@
 // import './App.css';
 import { Button } from '@material-ui/core';
 import Header from 'components/Header';
+import ProductFeature from 'Features/Product';
 import { useSnackbar } from 'notistack';
 import { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
@@ -32,26 +33,27 @@ function App() {
     fetchProducts();
   }, []);
 
-  const {enqueueSnackbar} = useSnackbar();
-  const showNoti = ()=>{
-    enqueueSnackbar('Register successfully', {variant:'success'});
-  }
+  // Function gọi Notication
+  // const {enqueueSnackbar} = useSnackbar();
+  // const showNoti = ()=>{
+  //   enqueueSnackbar('Register successfully', {variant:'success'});
+  // }
 
   return (
     <div className="App">
       <Header />
       <header className="App-header">
-        <Button onClick={showNoti}>show notiStack</Button>
+        {/* <Button onClick={showNoti}>show notiStack</Button> */}
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <h3> {firstName} {lastName} - {age} - {gender ? 'Nam' : 'Nữ'}</h3>
-        <ul>
+        {/* <h3> {firstName} {lastName} - {age} - {gender ? 'Nam' : 'Nữ'}</h3> */}
+        {/* <ul>
           {myhobbys.map((hobby, index) => (  //cú pháp của JSX thay vì {} thì sử dụng ()
             <li key={index}>
               {hobby}
             </li>
           ))
           }
-        </ul>
+        </ul> */}
 
         {/* sử dụng Link  */}
         {/* <p><Link to="/Todo">To do list</Link></p>
@@ -81,6 +83,9 @@ function App() {
 
           <Route path="/StateExvercise" component={StateExcercise} />
           {/* <StateExcercise /> */}
+
+          <Route path="/Products" component={ProductFeature} />
+          {/* <Product /> */}
 
           {/* TẠO RA 1 ROUTE NOT FOUND KHI KHÔNG TÌM THẤY DƯỜNG DẪN */}
           <Route component={NotFound} />
