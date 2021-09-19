@@ -4,6 +4,7 @@ import productApi from 'api/productApi';
 import React, { useEffect, useState } from 'react';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
+import ProductSort from '../components/ProductSort';
 
 ListPage.propTypes = {};
 
@@ -37,6 +38,7 @@ function ListPage(props) {
   const [filters, setFilters] = useState({
     _limit: 9,
     _page: 1,
+    _sort: 'salePrice:ASC',
   });
 
   // các state trong pagination được khởi tạo tương tự trong Api
@@ -66,11 +68,19 @@ function ListPage(props) {
     })();
   }, [filters]);
 
-  // Bài 126: handle onPageChange
+  // Bài 126: handlePageChange
   const handlePageChange = (e, page) => {
     setFilters((preFilters) => ({
       ...preFilters,
       _page: page,
+    }));
+  };
+
+  // Bài 128: handleSortChange
+  const handleSortChange = (newSortValue) => {
+    setFilters((preFilters) => ({
+      ...preFilters,
+      _sort: newSortValue,
     }));
   };
   return (
@@ -83,6 +93,8 @@ function ListPage(props) {
 
           <Grid item className={classes.right}>
             <Paper elevation={0}>
+              <ProductSort currentSort={filters._sort} onChange={handleSortChange} />
+
               {Loading ? <ProductSkeletonList /> : <ProductList data={productList} />}
 
               <Box className={classes.pagination}>
