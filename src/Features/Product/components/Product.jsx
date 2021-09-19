@@ -14,7 +14,7 @@ function Product({ product }) {
     <Box padding={1}>
       {/* Thumbnail cho sản phẩm */}
       <Box padding={1}>
-        <img src={thumbnailUrl} alt={product.name} width="100%" minHeight={200} />
+        <img src={thumbnailUrl} alt={product.name} width="100%" minheight={200} />
       </Box>
 
       <Typography>{product.name}</Typography>
