@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Box, Container, Grid, Paper, makeStyles, Typography } from '@material-ui/core';
+import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
+import { Pagination } from '@material-ui/lab';
 import productApi from 'api/productApi';
-import ProductSkeletonList from '../components/ProductSkeletonList';
+import React, { useEffect, useState } from 'react';
 import ProductList from '../components/ProductList';
+import ProductSkeletonList from '../components/ProductSkeletonList';
 
 ListPage.propTypes = {};
 
@@ -26,13 +26,30 @@ function ListPage(props) {
   const [productList, setProductList] = useState([]);
   const [Loading, setLoading] = useState(true);
 
+  // Bài 126: tạo state filters và pagination , state trong filters được khởi tạo tương tự trong Api
+  const [filters, setFilters] = useState({
+    _limit: 9,
+    _page: 1,
+  });
+
+  // các state trong pagination được khởi tạo tương tự trong Api
+  const [pagination, setPagination] = useState({
+    limit: 9,
+    total: 10,
+    page: 1,
+  });
+
   // tạo UseEffect
+  // Bài 126: mỗi khi filters thay đổi thì sẽ get api lại.
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await productApi.getAll({ _page: 1, _limit: 10 });
+        const { data, pagination } = await productApi.getAll(filters);
         // sử dụng object destructuring
         setProductList(data);
+        setPagination(pagination);
+
+        console.log({ data, pagination });
         //console.log(response);
       } catch (error) {
         console.log('Failed to fetch product list ', error);
@@ -40,7 +57,15 @@ function ListPage(props) {
       // sau khi load productlist xong sẽ tắt loading
       setLoading(false);
     })();
-  }, []);
+  }, [filters]);
+
+  // Bài 126: handle onPageChange
+  const handlePageChange = (e, page) => {
+    setFilters((preFilters) => ({
+      ...preFilters,
+      _page: page,
+    }));
+  };
   return (
     <Box>
       <Container>
@@ -50,7 +75,17 @@ function ListPage(props) {
           </Grid>
 
           <Grid item className={classes.right}>
-            <Paper elevation={0}>{Loading ? <ProductSkeletonList /> : <ProductList data={productList} />}</Paper>
+            <Paper elevation={0}>
+              {Loading ? <ProductSkeletonList /> : <ProductList data={productList} />}
+
+              <Pagination
+                count={Math.ceil(pagination.total / pagination.limit)}
+                page={pagination.page}
+                onChange={handlePageChange}
+                variant="outlined"
+                color="primary"
+              />
+            </Paper>
           </Grid>
         </Grid>
       </Container>
