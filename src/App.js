@@ -1,12 +1,7 @@
-// import logo from './logo.svg';
-// import './App.css';
-import { Button } from '@material-ui/core';
+
 import Header from 'components/Header';
 import ProductFeature from 'Features/Product';
-import { useSnackbar } from 'notistack';
-import { useEffect } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import productApi from './api/productApi';
 import NotFound from './components/NotFound';
 import AlbumFeature from './Features/AlbumMusic';
 import CounterFeature from './Features/Counter';
@@ -15,23 +10,23 @@ import TodoFeature from './Features/Todo';
 
 function App() {
 
-  const lastName = "Huu Nhat";
-  const firstName = "Vo ";
-  const age = 26;
-  const gender = true;
-  const myhobbys = ['coding', 'reading', 'runing', 'eat'];
+  // const lastName = "Huu Nhat";
+  // const firstName = "Vo ";
+  // const age = 26;
+  // const gender = true;
+  // const myhobbys = ['coding', 'reading', 'runing', 'eat'];
 
 
   //Bài 58 : Demo gọi API lấy dữ liệu
   // cách gọi Api thì sử dụng Effect -> ở ví dụ này chỉ muốn load 1 lần duy nhất thì truyền dependence rỗng
-  useEffect(() => {
-    const fetchProducts = async () =>{
-      const params = {_limit : 10,};  // yêu cầu chỉ lấy ra 10 record
-      const productList = await productApi.getAll(params);
-      console.log(productList);
-    };
-    fetchProducts();
-  }, []);
+  // useEffect(() => {
+  //   const fetchProducts = async () =>{
+  //     const params = {_limit : 10,};  // yêu cầu chỉ lấy ra 10 record
+  //     const productList = await productApi.getAll(params);
+  //     console.log(productList);
+  //   };
+  //   fetchProducts();
+  // }, []);
 
   // Function gọi Notication
   // const {enqueueSnackbar} = useSnackbar();
@@ -61,7 +56,7 @@ function App() {
         <p><Link to="/StateExvercise">State Exvercise</Link></p> */}
 
         {/* Sử dung NavLink */}
-        
+
 
 
         {/* Noted : sử dụng Switch và route matching  */}
