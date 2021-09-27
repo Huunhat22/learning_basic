@@ -2,6 +2,8 @@ import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import productApi from 'api/productApi';
 import React, { useEffect, useState } from 'react';
+import FilterSkeletonList from '../components/Filters/FilterSkeletonList';
+import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 import ProductSort from '../components/ProductSort';
@@ -83,12 +85,23 @@ function ListPage(props) {
       _sort: newSortValue,
     }));
   };
+
+  // Bài 131: handleFilterChange , hàm này sẽ giữ lại các giá trị filter cũ và sẽ cộng thêm các filter mới.
+  const handleFilterChange = (newFilters) => {
+    setFilters((preFilters) => ({
+      ...preFilters,
+      ...newFilters,
+    }));
+  };
   return (
     <Box>
       <Container>
         <Grid container spacing={2}>
           <Grid item className={classes.left}>
-            <Paper elevation={0}>Colum left</Paper>
+            <Paper elevation={0}>
+              {/* Bài 131: Lọc theo danh mục - component ProductFilters */}
+              {Loading ? <FilterSkeletonList /> : <ProductFilters filters={filters} onChange={handleFilterChange} />}
+            </Paper>
           </Grid>
 
           <Grid item className={classes.right}>
