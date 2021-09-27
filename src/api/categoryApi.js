@@ -1,27 +1,27 @@
 import axiosClient from "./axiosClient";
 
 const categoryApi = {
-    getAll(params){
-        const url ='/catagories';
-        return axiosClient.get(url,{params}); // có thể viết {params : params}
+    getAll(params) {
+        const url = '/categories';
+        return axiosClient.get(url, { params }); // có thể viết {params : params}
     },
 
-    get(id){
-        const url =`/categories/${id}`;
+    get(id) {
+        const url = `/categories/${id}`;
         return axiosClient.get(url);
     },
 
-    add(data){
+    add(data) {
         const url = '/categories';
-        return axiosClient.post(url,data);
+        return axiosClient.post(url, data);
     },
 
-    update(data){
+    update(data) {
         const url = `/categories/${data.id}`;
-        return axiosClient.patch(url,data);
+        return axiosClient.patch(url, data);
     },
 
-    remove(id){
+    remove(id) {
         const url = `/categories/${id}`;
         return axiosClient.delete(url);
     }
