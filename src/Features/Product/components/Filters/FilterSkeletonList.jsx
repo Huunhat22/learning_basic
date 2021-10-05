@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, makeStyles, Menu } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
-import { array } from 'yup/lib/locale';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 FilterSkeletonList.propTypes = {
     length: PropTypes.number,
@@ -31,7 +30,7 @@ function FilterSkeletonList({ length }) {
     const classes = useStyle();
     return (
         <Box className={classes.root} minHeight="202px">
-            <Skeleton variant="subtitle2" />
+            <Skeleton variant="rect" />
 
             <ul className={classes.menu}>
                 {Array.from(new Array(length)).map((x, index) => (
