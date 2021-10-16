@@ -3,6 +3,7 @@ import { Pagination } from '@material-ui/lab';
 import productApi from 'api/productApi';
 import React, { useEffect, useState } from 'react';
 import FilterSkeletonList from '../components/Filters/FilterSkeletonList';
+import FilterViewer from '../components/Filters/FilterViewer';
 import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
@@ -93,6 +94,11 @@ function ListPage(props) {
       ...newFilters,
     }));
   };
+
+  // Bài 136:
+  const setNewFilters = (newFilters) => {
+    setFilters(newFilters);
+  };
   return (
     <Box>
       <Container>
@@ -107,6 +113,7 @@ function ListPage(props) {
           <Grid item className={classes.right}>
             <Paper elevation={0}>
               <ProductSort currentSort={filters._sort} onChange={handleSortChange} />
+              <FilterViewer filters={filters} onChange={setNewFilters} />
 
               {Loading ? <ProductSkeletonList /> : <ProductList data={productList} />}
 
