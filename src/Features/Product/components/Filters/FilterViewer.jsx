@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Chip, makeStyles } from '@material-ui/core';
 
@@ -85,10 +85,16 @@ const FILTER_LIST = [
 function FilterViewer({ filters = {}, onChange = null }) {
   const classes = useStyle();
 
+  // Bài 138 : tối ưu bằng hook usememo
+  // FILTER_LIST  sẽ được tính toán lại khi filters thay đổi
+  const visbleFilters = useMemo(() => {
+    return FILTER_LIST.filter((x) => x.isVisible(filters));
+  }, [filters]);
+
   return (
     <Box component="ul" className={classes.root}>
       {/* mình sẽ lọc lại những filter nào đang visible và sau đó sẽ duyệt bằng hàm map */}
-      {FILTER_LIST.filter((x) => x.isVisible(filters)).map((x) => (
+      {visbleFilters.map((x) => (
         <li key={x.id}>
           <Chip
             label={x.getLabel(filters)}
