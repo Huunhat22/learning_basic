@@ -8,6 +8,8 @@ import ProductFilters from '../components/ProductFilters';
 import ProductList from '../components/ProductList';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 import ProductSort from '../components/ProductSort';
+import { useHistory, useLocation } from 'react-router-dom';
+import queryString from 'query-string';
 
 ListPage.propTypes = {};
 
@@ -37,11 +39,25 @@ function ListPage(props) {
   const [productList, setProductList] = useState([]);
   const [Loading, setLoading] = useState(true);
 
+  // Bài 139: sử dụng hook history
+  const history = useHistory();
+  const location = useLocation();
+  // chuyển 1 chuổi urls thành object => truyền vào filters
+  const queryParams = queryString.parse(location.search);
+
   // Bài 126: tạo state filters và pagination , state trong filters được khởi tạo tương tự trong Api
+  // const [filters, setFilters] = useState({
+  //   _limit: 9,
+  //   _page: 1,
+  //   _sort: 'salePrice:ASC',
+  // });
+
+  // Bài 139 : lấy queryParams từ sreach => truyền vào object filters
   const [filters, setFilters] = useState({
-    _limit: 9,
-    _page: 1,
-    _sort: 'salePrice:ASC',
+    ...queryParams,
+    _limit: Number.parseInt(queryParams._limit || 9),
+    _page: Number.parseInt(queryParams._page || 1),
+    _sort: queryParams._sort || 'salePrice:ASC',
   });
 
   // các state trong pagination được khởi tạo tương tự trong Api
@@ -50,6 +66,15 @@ function ListPage(props) {
     total: 10,
     page: 1,
   });
+
+  // Baì 139: tạo useEffect , dùng để push filters vào pathname
+  useEffect(() => {
+    // todo : syns filters to Urls, chuyển object filers thành 1 chuỗi. history không thay đổi, chỉ filters thay đổi
+    history.push({
+      pathname: history.location.pathname,
+      search: queryString.stringify(filters),
+    });
+  }, [history, filters]);
 
   // tạo UseEffect
   // Bài 126: mỗi khi filters thay đổi thì sẽ get api lại.
