@@ -46,6 +46,7 @@ function ListPage(props) {
   // const queryParams = queryString.parse(location.search);
 
   // Bài 140: sử dụng useMemo , queryParams thay đổi khi location.sreach thay đổi
+  // khi sử dụng back trên trình duyệt thì các params sẽ thay đổi
   const queryParams = useMemo(() => {
     const params = queryString.parse(location.search);
     // note: true => 'true', vì là chuỗi nên nó sẽ không nhận được kiểu bolean
