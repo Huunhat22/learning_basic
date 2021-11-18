@@ -4,6 +4,7 @@ import { useRouteMatch } from 'react-router';
 import AddToCardForm from '../components/AddToCardForm';
 import ProducThumbnail from '../components/ProducThumbnail';
 import ProductInfo from '../components/ProductInfo';
+import ProductMenu from '../components/ProductMenu';
 import useProductDetail from '../hook/useProductDetail';
 
 DetailPage.propTypes = {
@@ -65,6 +66,7 @@ function DetailPage(props) {
                         </Grid>
                     </Grid>
                 </Paper>
+                <ProductMenu />
             </Container>
         </Box>
     );
