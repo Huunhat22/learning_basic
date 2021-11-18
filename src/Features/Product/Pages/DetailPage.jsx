@@ -1,6 +1,7 @@
 import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
 import { useRouteMatch } from 'react-router';
+import AddToCardForm from '../components/AddToCardForm';
 import ProducThumbnail from '../components/ProducThumbnail';
 import ProductInfo from '../components/ProductInfo';
 import useProductDetail from '../hook/useProductDetail';
@@ -45,6 +46,11 @@ function DetailPage(props) {
                 </Box>
     }
 
+    // Bài 148: Handle Add To Card Form Submit
+    const HandleAddToCardForm = (formValues) =>{
+        console.log('Fomr Submit',formValues);
+    }
+
     return (
         <Box className={classes.root}>
             <Container>
@@ -55,6 +61,7 @@ function DetailPage(props) {
                         </Grid>
                         <Grid item className={classes.right}>
                             <ProductInfo product={product}/>
+                            <AddToCardForm onSubmit={HandleAddToCardForm}/>
                         </Grid>
                     </Grid>
                 </Paper>
