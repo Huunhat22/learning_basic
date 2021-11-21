@@ -1,6 +1,6 @@
-import { Box, makeStyles } from '@material-ui/core';
+import { Box, makeStyles,Link } from '@material-ui/core';
 import React from 'react';
-import { Link, NavLink, useRouteMatch } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 
 ProductMenu.propTypes = {
     
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         },
 
         '& > li > a.active':{
-            color: theme.palette.primary,
+            color: theme.palette.primary.main,
             textDecoration:'underline',
         }
     },
@@ -42,13 +42,13 @@ function ProductMenu(props) {
     return (
         <Box component='ul' className={classes.root}>
             <li>
-                <Link to={url}>Description</Link>
+                <Link component={NavLink} to={url} exact>Description</Link>
             </li>
             <li>
-                <Link to={`${url}/additional`} exact>Additional Information</Link>
+                <Link component={NavLink} to={`${url}/additional`} exact>Additional Information</Link>
             </li>
             <li>
-                <Link to={`${url}/reviews`} exact>Reviews</Link>    
+                <Link component={NavLink} to={`${url}/reviews`} exact>Reviews</Link>    
             </li>
         </Box>
     );
