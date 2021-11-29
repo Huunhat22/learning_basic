@@ -1,1 +1,10 @@
-test commit and user ssh key
+// Phân tích giỏ hàng, các thông tin lưu vào Redux
+Cart
+__showMiniCart: false/true
+__cartItems -> mỗi item sẽ lưu thông tin (product, quantity)
+
+
+State tính toán phụ thuộc vào State có sẳn
+__cartItemsCount
+__cartTotal
+--> sử dụng createSelector()
