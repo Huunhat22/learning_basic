@@ -1,5 +1,6 @@
 
 import Header from 'components/Header';
+import CartFeatur from 'Features/Cart';
 import ProductFeature from 'Features/Product';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import NotFound from './components/NotFound';
@@ -82,6 +83,8 @@ function App() {
           <Route path="/Products" component={ProductFeature} />
           {/* <Product /> */}
 
+          <Route path="/cart" component={CartFeatur} />
+          
           {/* TẠO RA 1 ROUTE NOT FOUND KHI KHÔNG TÌM THẤY DƯỜNG DẪN */}
           <Route component={NotFound} />
         </Switch>
