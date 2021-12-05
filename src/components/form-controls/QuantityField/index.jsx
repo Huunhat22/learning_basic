@@ -18,15 +18,22 @@ QuantityField.propTypes = {
 
 const useStyle = makeStyles((theme) => ({
     root: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'spaceBetween',
+        flexDirection: 'row',
     },
     quantity: {
-        fontWeight: 'bold',
-        marginBottom: theme.spacing(2),
+        fontWeight: '400',
+        marginRight: theme.spacing(2),
     },
 
     textfield: {
         "& input": {
+            width: '50px',
+            padding: '10px',
             textAlign: 'center',
+
         }
     },
 }))
@@ -53,9 +60,10 @@ function QuantityField(props) {
             control={control}
             render={({ field: { onChange, onBlur, value, name }, fieldState: { invalid, error } }) => (
                 <>
-                    <FormControl error={invalid} fullWidth variant="outlined" margin="normal">
-                        <Typography className={classes.quantity}>{label}</Typography>
-
+                    <FormControl error={invalid} fullWidth variant="outlined" margin="normal" className={classes.root}>
+                        <Box>
+                            <Typography className={classes.quantity}>{label}</Typography>
+                        </Box>
                         <Box>
                             <IconButton onClick={() => handleRemoveQuantity(name, value)}>
                                 <RemoveCircleOutline />
