@@ -83,8 +83,8 @@ function App() {
           <Route path="/Products" component={ProductFeature} />
           {/* <Product /> */}
 
-          <Route path="/cart" component={CartFeatur} />
-          
+          <Route path="/Cart" component={CartFeatur} />
+
           {/* TẠO RA 1 ROUTE NOT FOUND KHI KHÔNG TÌM THẤY DƯỜNG DẪN */}
           <Route component={NotFound} />
         </Switch>
