@@ -1,7 +1,8 @@
+import { Box } from '@material-ui/core';
+import { Router } from '@material-ui/icons';
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-import { cartTotalSelector } from './selectors';
+import { Switch, useRouteMatch } from 'react-router';
+import ListCart from './Pages/ListCart';
 
 CartFeatur.propTypes = {
 
@@ -9,13 +10,15 @@ CartFeatur.propTypes = {
 
 function CartFeatur(props) {
 
-    // Bài 159: lấy ra tổng số tiền của giỏ hàng
-    const totalCart = useSelector(cartTotalSelector);
+    // sử dụng useRouteMath
+    const match = useRouteMatch();
 
     return (
-        <div>
-            CartFeatur {totalCart}
-        </div>
+        <Box pt={4}>
+            <Switch>
+                <Router path={match.url} exact component={ListCart}/>
+            </Switch>
+        </Box>
     );
 }
 
