@@ -1,68 +1,97 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { cartTotalSelector } from '../selectors';
 
 CartTotal.propTypes = {
-    
+
 };
 
-const useStyles = makeStyles((theme) =>({
-    root:{
+const useStyles = makeStyles((theme) => ({
+    root: {
 
     },
 
-    infor:{
+    infor: {
         padding: theme.spacing(2),
     },
 
-    delivery:{
-        fontSize:'14px',
-        color:'#242424',
-        marginBottom:'15px',
-        fontWeight:'bold'
-    },
-    
-    fullname:{
-        fontSize:'15px',
-        fontWeight:'bold',
-        marginBottom:'15px',
+    delivery: {
+        fontSize: '14px',
+        color: '#242424',
+        marginBottom: '15px',
+        fontWeight: 'bold'
     },
 
-    address:{
-        fontSize:'13px',
-        color:theme.palette.grey[500],
+    fullname: {
+        fontSize: '15px',
+        fontWeight: 'bold',
+        marginBottom: '15px',
     },
 
-    detail:{
-        marginTop: theme.spacing(2),
+    address: {
+        fontSize: '13px',
+        color: theme.palette.grey[500],
+    },
+
+    detail: {
+        margin: theme.spacing(2, 0),
+    },
+
+    priceItems: {
+        margin: '0',
+        padding: theme.spacing(2),
+        listStyle: 'none',
+        borderBottom: '1px solid rgb(244 , 244 ,244)',
+    },
+
+    priceItem: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '10px',
+
+    },
+
+    text: {
+        fontSize: '14px',
+        color: theme.palette.grey[700],
+    },
+
+    value: {
+        fontSize: '14px',
+        color: theme.palette.grey[700],
+        fontWeight: 'bold',
+    },
+
+    total: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexWrap: 'nowrap',
         padding: theme.spacing(2),
     },
 
-    priceItems:{
-        margin:'0',
-        padding:'0',
-        listStyle:'none',
+    price: {
+        color: 'rgb(254, 56, 52)',
     },
 
-    priceItem:{
-        display:'flex',
-        justifyContent:'space-between',
-        alignItems:'center',
-        marginBottom:'10px',
-    
+    note: {
+        fontSize: '13px',
+        color: theme.palette.grey[700],
     },
 
-    text:{
-        fontSize:'14px',
-        color:theme.palette.grey[500],
-    },
+    submit: {
+        backgroundColor: 'rgb(255, 66, 78)',
+        color: '#fff',
+        width: '100%',
+        textTransform: 'none',
 
-    value:{
-        fontSize:'14px',
-        color:theme.palette.grey[700],
+        '&:hover': {
+            backgroundColor: 'rgb(255, 15, 30)',
+        }
     }
+
 
 }));
 
@@ -96,12 +125,18 @@ function CartTotal(props) {
                     </Box>
                     <Box className={classes.total}>
                         {/* Bài 159: lấy ra tổng số tiền của giỏ hàng */}
-                        
+                        <span className={classes.text}>Total Payment</span>
+                        <Box style={{ textAlign: 'right' }}>
+                            <Typography className={classes.price}>Please select item</Typography>
+                            <Typography variant='body2' className={classes.note}>(VAT incluled)</Typography>
+                        </Box>
                     </Box>
                 </Box>
             </Paper>
+            <Button type="submit" className={classes.submit} >Place Order</Button>
+
         </Box>
-        
+
     );
 }
 
