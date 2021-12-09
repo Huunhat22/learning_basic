@@ -4,6 +4,7 @@ import { Box, Container, Grid, Paper, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import CartList from '../components/CartList';
 import CartTotal from '../components/CartTotal';
+import { useSelector } from 'react-redux';
 
 CartPage.propTypes = {
     
@@ -31,15 +32,17 @@ const useStyles = makeStyles((theme) => ({
 
 function CartPage(props) {
     const classes = useStyles();
+
+    const cartList = useSelector(state => state.cart.cartItems);
+    console.log({cartList});
+
     return (
         <Box>
             <Container>
                 <Typography variant='h6' className={classes.title}>Cart List</Typography>
                 <Grid container spacing={2}>
                     <Grid item className={classes.left}>
-                        <Paper elevation={0}>
-                            <CartList></CartList>
-                        </Paper>
+                        <CartList data={cartList}></CartList>
                     </Grid>
                     <Grid item className={classes.right}>
                         <CartTotal></CartTotal>
