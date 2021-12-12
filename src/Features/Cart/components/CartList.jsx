@@ -14,7 +14,9 @@ const useStyles = makeStyles((theme) => ({
         margin:'0',
         padding:'0',
     },
-    CartItem:{},
+    CartItem:{
+        margin:theme.spacing(2 ,0),
+    },
 }));
 
 function CartList({data=[]}) {
