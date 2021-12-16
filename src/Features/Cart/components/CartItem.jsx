@@ -8,8 +8,7 @@ import { setQuantityItem } from '../cartSlice';
 import { useDispatch } from 'react-redux';
 
 CartItem.propTypes = {
-    product: PropTypes.object,
-    quantity: PropTypes.number,
+    item: PropTypes.object,
 };
 
 const useStyle =  makeStyles((theme) => ({
@@ -56,10 +55,9 @@ const useStyle =  makeStyles((theme) => ({
 
 }));
 
-function CartItem({product={},quantity}) {
+function CartItem({item}) {
 
-    const {name,promotionPercent,originalPrice} = product;
-    // const {quantity} = quantity;
+    const {product, quantity} = item;
     
     const classes = useStyle();
     const dispatch = useDispatch();
@@ -78,7 +76,7 @@ function CartItem({product={},quantity}) {
         });
         dispatch(action);
     }
-    // console.log("quantiy of item: ",quantity);
+    console.log("quantiy of item: ",typeof(quantity));
     return (
         <Paper elevation={0}>
             <Box className={classes.root}>
@@ -87,16 +85,16 @@ function CartItem({product={},quantity}) {
                     <Box className={classes.image}>
                         <img src={thumbnailUrl} alt={product.name} width="100%"/>
                     </Box>
-                    <Typography>{name}</Typography>
+                    <Typography>{product.name}</Typography>
                 </Box>
                 <Box className={classes.price}>
                     <Typography width="60%">
                         {formatPrice(product.salePrice)}
-                        {promotionPercent > 0 && <Box component="span" className={classes.originalPrice}> {formatPrice(originalPrice)} </Box>}
+                        {product.promotionPercent > 0 && <Box component="span" className={classes.originalPrice}> {formatPrice(product.originalPrice)} </Box>}
                     </Typography>
                 </Box>
                 <Box className={classes.quantity} >
-                    <ChangeQuantityItem onSubmit={HandleChangeQuantity}></ChangeQuantityItem>
+                    <ChangeQuantityItem onSubmit={HandleChangeQuantity} quantity={quantity}></ChangeQuantityItem>
                 </Box>
                 <Box className={classes.total}>
 
