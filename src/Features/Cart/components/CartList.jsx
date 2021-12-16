@@ -25,7 +25,7 @@ function CartList({data=[]}) {
         <Box component='ul' className={classes.CartList}>
             {data.map((item)=> (
                 <li item key={item.id} className={classes.CartItem}>
-                    <CartItem product={item.product} quantity= {item.quantity}></CartItem>
+                    <CartItem item={item}></CartItem>
                 </li>
             ))}
         </Box>
