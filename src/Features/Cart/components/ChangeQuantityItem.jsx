@@ -8,12 +8,15 @@ ChangeQuantityItem.propTypes = {
     quantity: PropTypes.number,
 };
 
-function ChangeQuantityItem({onSubmit = null}, quantity) {
-    console.log("quantiy of item: ",quantity);
+function ChangeQuantityItem(props) {
+
+    const {quantity,onSubmit=null} = props;
+
     const form = useForm({
         defaultValues:{
-            quantity: quantity,
+            quantity: Number.parseInt(quantity),
         }
+        
     }) 
 
     const handleSubmit =  async (values)=>{
