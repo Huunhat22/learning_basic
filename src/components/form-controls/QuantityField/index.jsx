@@ -1,10 +1,9 @@
-import { Box, FormHelperText, IconButton, Input, makeStyles, Typography } from '@material-ui/core';
+import { Box, FormHelperText, IconButton, makeStyles, Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller } from 'react-hook-form';
 
 

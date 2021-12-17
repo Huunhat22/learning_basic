@@ -124,7 +124,6 @@ export default function Header() {
           </NavLink>
 
           <IconButton
-            size="large"
             aria-label="show new notifications"
             color="inherit"
             onClick={handleGoToCart}
