@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import QuantityField from 'components/form-controls/QuantityField';
 import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 ChangeQuantityItem.propTypes = {
     onSubmit:PropTypes.func,
@@ -12,10 +14,16 @@ function ChangeQuantityItem(props) {
 
     const {quantity,onSubmit=null} = props;
 
+    // validation cho quantity
+    const schema = yup.object().shape({
+        quantity: yup.number().required('Please enter quantity').min(1,'quantity at least 1').max(10,'quantity maximun 10').typeError('Please enter a number'),
+    });
+
     const form = useForm({
         defaultValues:{
             quantity: Number.parseInt(quantity),
-        }
+        },
+        resolver: yupResolver(schema),
         
     }) 
 
