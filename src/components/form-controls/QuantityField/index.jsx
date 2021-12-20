@@ -1,7 +1,8 @@
 import { Box, FormHelperText, IconButton, makeStyles, Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
-import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined';
+import RemoveOutlinedIcon from '@material-ui/icons/RemoveOutlined';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Controller } from 'react-hook-form';
@@ -18,9 +19,8 @@ QuantityField.propTypes = {
 const useStyle = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'spaceBetween',
-        flexDirection: 'row',
     },
     quantity: {
         fontWeight: '400',
@@ -29,8 +29,8 @@ const useStyle = makeStyles((theme) => ({
 
     textfield: {
         "& input": {
-            width: '50px',
-            padding: '10px',
+            width: '25px',
+            padding: '5px',
             textAlign: 'center',
 
         }
@@ -60,12 +60,12 @@ function QuantityField(props) {
             render={({ field: { onChange, onBlur, value, name }, fieldState: { invalid, error } }) => (
                 <>
                     <FormControl error={invalid} fullWidth variant="outlined" margin="normal" className={classes.root}>
-                        <Box>
+                        {/* <Box>
                             <Typography className={classes.quantity}>{label}</Typography>
-                        </Box>
+                        </Box> */}
                         <Box>
                             <IconButton onClick={() => handleRemoveQuantity(name, value)}>
-                                <RemoveCircleOutline />
+                                <RemoveOutlinedIcon></RemoveOutlinedIcon>
                             </IconButton>
                             <OutlinedInput className={classes.textfield}
                                 id={name}
@@ -76,7 +76,7 @@ function QuantityField(props) {
                                 onBlur={onBlur}
                             />
                             <IconButton onClick={() => handleAddQuantity(name, value)}>
-                                <AddCircleOutline></AddCircleOutline>
+                                <AddOutlinedIcon></AddOutlinedIcon>
                             </IconButton>
                         </Box>
 
