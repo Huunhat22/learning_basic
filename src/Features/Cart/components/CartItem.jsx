@@ -23,8 +23,9 @@ const useStyle = makeStyles((theme) => ({
   thumbnail: {
     display: 'flex',
     justifyContent: 'flex-start',
-    width: '300px',
-    marginRight: theme.spacing(2),
+    flexGrow: '1',
+
+    width: '30%',
   },
 
   image: {
@@ -35,28 +36,55 @@ const useStyle = makeStyles((theme) => ({
       objectFit: 'cover',
     },
   },
+  
   content: {
     width: 'calc(100% - 80px)',
     paddingLeft: '10px',
     position: 'relative',
   },
+
   title: {
     display: '-webkit-box',
     textOverflow: 'ellipsis',
-    "-webkit-line-clamp": '2',
-    "-webkit-box-orient": 'vertical',
-    
+    '-webkit-line-clamp': '2',
+    '-webkit-box-orient': 'vertical',
+
     overflow: 'hidden',
     fontSize: '13px',
     marginBottom: '5px',
     lineHeight: '20px',
   },
 
-  price: {},
+  price: {
+    display: 'flex',
+    justifyContent: 'flex-start',
+    width: '20%',
+  },
 
-  quantity: {},
+  salePrice: {
+    marginRight: '10px',
+    fontWeight: '500',
+  },
 
-  total: {},
+  originalPrice: {
+    fontSize: '11px',
+    color: 'rgb(153, 153, 153)',
+    textDecoration: 'line-through',
+  },
+
+  quantity: {
+    width: '20%',
+  },
+
+  total: {
+    width: '20%',
+
+    '& > p': {
+      fontSize: '13px',
+      fontWeight: '600',
+      color: 'rgb(254, 56, 52)',
+    },
+  },
 
   remove: {},
 }));
@@ -94,15 +122,16 @@ function CartItem({ item }) {
           </Box>
         </Box>
         <Box className={classes.price}>
-          <Typography width="60%">
+          <Box component="span" className={classes.salePrice}>
             {formatPrice(product.salePrice)}
+          </Box>
+          <Box>
             {product.promotionPercent > 0 && (
               <Box component="span" className={classes.originalPrice}>
-                {' '}
-                {formatPrice(product.originalPrice)}{' '}
+                {formatPrice(product.originalPrice)}
               </Box>
             )}
-          </Typography>
+          </Box>
         </Box>
         <Box className={classes.quantity}>
           <ChangeQuantityItem onSubmit={HandleChangeQuantity} quantity={quantity}></ChangeQuantityItem>
