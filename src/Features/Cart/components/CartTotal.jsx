@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Box, Button, makeStyles, Paper, Typography } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import { cartTotalSelector } from '../selectors';
+import { formatPrice } from 'utils/common';
 
 CartTotal.propTypes = {
 
@@ -116,7 +117,7 @@ function CartTotal(props) {
                     <Box className={classes.priceItems} component='ul'>
                         <li className={classes.priceItem}>
                             <span className={classes.text}>Temporary Price</span>
-                            <span className={classes.value}>1200000</span>
+                            <span className={classes.value}>{formatPrice(totalCart)}</span>
                         </li>
                         <li className={classes.priceItem}>
                             <span className={classes.text}>Discount Price</span>
@@ -127,7 +128,7 @@ function CartTotal(props) {
                         {/* Bài 159: lấy ra tổng số tiền của giỏ hàng */}
                         <span className={classes.text}>Total Payment</span>
                         <Box style={{ textAlign: 'right' }}>
-                            <Typography className={classes.price}>Please select item</Typography>
+                            <Typography className={classes.price}>{totalCart > 0 ? formatPrice(totalCart): `Please select item` }</Typography>
                             <Typography variant='body2' className={classes.note}>(VAT incluled)</Typography>
                         </Box>
                     </Box>
