@@ -4,7 +4,7 @@ import { Box, makeStyles, Paper, Typography, IconButton } from '@material-ui/cor
 import { STATIC_HOST, THUMBNAIL_PLACEHOLDER } from 'constants/index';
 import { formatPrice } from 'utils/common';
 import ChangeQuantityItem from './ChangeQuantityItem';
-import { setQuantityItem } from '../cartSlice';
+import { removeCardItem, setQuantityItem } from '../cartSlice';
 import { useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -36,7 +36,7 @@ const useStyle = makeStyles((theme) => ({
       objectFit: 'cover',
     },
   },
-  
+
   content: {
     width: 'calc(100% - 80px)',
     paddingLeft: '10px',
@@ -97,18 +97,23 @@ function CartItem({ item }) {
 
   // HẰNG SỐ ĐƯỢC IMPORT VÀO TỪ common.js thông qua index.js
   const thumbnailUrl = product.thumbnail ? `${STATIC_HOST}${product.thumbnail?.url}` : THUMBNAIL_PLACEHOLDER;
+  const totalItem = quantity * product.salePrice;
 
   const HandleChangeQuantity = (formValues) => {
     // console.log('Fomr Submit',formValues);
-
-    // Bài 158 : handle addToCart
     const action = setQuantityItem({
       id: product.id,
       quantity: formValues.quantity,
     });
     dispatch(action);
   };
-  console.log('quantiy of item: ', typeof quantity);
+
+  const handleDeleteItem = (idItem) => {
+    const action = removeCardItem(idItem);
+
+    dispatch(action);
+  };
+
   return (
     <Paper elevation={0}>
       <Box className={classes.root}>
@@ -137,10 +142,14 @@ function CartItem({ item }) {
           <ChangeQuantityItem onSubmit={HandleChangeQuantity} quantity={quantity}></ChangeQuantityItem>
         </Box>
         <Box className={classes.total}>
-          <Typography>100.000.000</Typography>
+          <Typography>{formatPrice(totalItem)}</Typography>
         </Box>
         <Box className={classes.remove}>
-          <IconButton>
+          <IconButton
+            onClick={() => {
+              handleDeleteItem(product.id);
+            }}
+          >
             <DeleteIcon />
           </IconButton>
         </Box>
