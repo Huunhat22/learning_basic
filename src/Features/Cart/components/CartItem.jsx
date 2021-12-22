@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, makeStyles, Paper, Typography, IconButton } from '@material-ui/core';
+import { Box, makeStyles, Paper, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
 import { STATIC_HOST, THUMBNAIL_PLACEHOLDER } from 'constants/index';
 import { formatPrice } from 'utils/common';
 import ChangeQuantityItem from './ChangeQuantityItem';
 import { removeCardItem, setQuantityItem } from '../cartSlice';
 import { useDispatch } from 'react-redux';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useState } from 'react';
 
 CartItem.propTypes = {
   item: PropTypes.object,
 };
+
+CartItem.defaultProps ={
+  item : {},
+}
 
 const useStyle = makeStyles((theme) => ({
   root: {
@@ -87,12 +92,40 @@ const useStyle = makeStyles((theme) => ({
   },
 
   remove: {},
+
+ 
+
+  dialog: {
+    padding: theme.spacing(3),
+    borderRadius:'5px',
+  },
+
+  message: {
+    margin: theme.spacing(2,0),
+    '& > p':{
+      fontWeight:'700',
+    },
+  },
+
+  action: {
+    display:'flex',
+    alignItems:'center',
+  },
+
+  dialogButton: {
+    padding: theme.spacing(1,2),
+    width: 'calc(50% - 15px)',
+    border:'1px solid red',
+  },
+
 }));
 
 function CartItem({ item }) {
   const { product, quantity } = item;
 
   const classes = useStyle();
+  const [open, setOpen] = useState(false);
+
   const dispatch = useDispatch();
 
   // HẰNG SỐ ĐƯỢC IMPORT VÀO TỪ common.js thông qua index.js
@@ -112,6 +145,14 @@ function CartItem({ item }) {
     const action = removeCardItem(idItem);
 
     dispatch(action);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -146,14 +187,34 @@ function CartItem({ item }) {
         </Box>
         <Box className={classes.remove}>
           <IconButton
-            onClick={() => {
-              handleDeleteItem(product.id);
-            }}
+            // onClick={() => {
+            //   handleDeleteItem(product.id);
+            // }}
+
+            onClick = {handleClickOpen}
           >
             <DeleteIcon />
           </IconButton>
         </Box>
       </Box>
+
+      {/* Dialog Confirm Delete Item */}
+      <Dialog open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-remove-item"
+        
+        >
+        <Box className={classes.dialog}>
+          <Box className={classes.message}>
+            <Typography >Do you want delete item ?</Typography>
+          </Box>
+          <Box className={classes.action}>
+            <Button className={classes.dialogButton}>Cancel</Button>
+            <Button className={classes.dialogButton}>Delete</Button>
+          </Box>
+        </Box>
+      </Dialog>
+
     </Paper>
   );
 }
