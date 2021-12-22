@@ -1,6 +1,6 @@
-import React from 'react';
+import { Box, makeStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { Box,Grid, makeStyles, Paper } from '@material-ui/core';
+import React from 'react';
 import CartItem from './CartItem';
 
 CartList.propTypes = {
