@@ -1,13 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, makeStyles, Paper, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
-import { STATIC_HOST, THUMBNAIL_PLACEHOLDER } from 'constants/index';
-import { formatPrice } from 'utils/common';
-import ChangeQuantityItem from './ChangeQuantityItem';
-import { removeCardItem, setQuantityItem } from '../cartSlice';
-import { useDispatch } from 'react-redux';
+import { Box, Button, Dialog, IconButton, makeStyles, Paper, Typography } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { useState } from 'react';
+import clsx from 'clsx';
+import { STATIC_HOST, THUMBNAIL_PLACEHOLDER } from 'constants/index';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { formatPrice } from 'utils/common';
+import { removeCardItem, setQuantityItem } from '../cartSlice';
+import ChangeQuantityItem from './ChangeQuantityItem';
 
 CartItem.propTypes = {
   item: PropTypes.object,
@@ -98,6 +98,7 @@ const useStyle = makeStyles((theme) => ({
   dialog: {
     padding: theme.spacing(3),
     borderRadius:'5px',
+    width:'400px',
   },
 
   message: {
@@ -110,12 +111,31 @@ const useStyle = makeStyles((theme) => ({
   action: {
     display:'flex',
     alignItems:'center',
+    justifyContent:'space-between',
   },
 
   dialogButton: {
     padding: theme.spacing(1,2),
-    width: 'calc(50% - 15px)',
-    border:'1px solid red',
+    width: 'calc(50% - 10px)',
+    textTransform: 'none',
+
+    fontSize:'15px',
+    fontWeight:'600',
+  },
+
+  cancel: {
+    color:'#0d5cb6',
+    border:'0.5px solid #0d5cb6', 
+  },
+
+  delete: {
+    backgroundColor:'#ff424e',
+    color:'#fff',
+    border:'0.5px solid #ff424e',
+
+    '&:hover': {
+      backgroundColor:'rgb(255, 15, 30)',
+    }
   },
 
 }));
@@ -187,10 +207,6 @@ function CartItem({ item }) {
         </Box>
         <Box className={classes.remove}>
           <IconButton
-            // onClick={() => {
-            //   handleDeleteItem(product.id);
-            // }}
-
             onClick = {handleClickOpen}
           >
             <DeleteIcon />
@@ -202,15 +218,14 @@ function CartItem({ item }) {
       <Dialog open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-remove-item"
-        
         >
         <Box className={classes.dialog}>
           <Box className={classes.message}>
             <Typography >Do you want delete item ?</Typography>
           </Box>
           <Box className={classes.action}>
-            <Button className={classes.dialogButton}>Cancel</Button>
-            <Button className={classes.dialogButton}>Delete</Button>
+            <Button className={clsx(classes.dialogButton,classes.cancel)} onClick={handleClose}>Cancel</Button>
+            <Button className={clsx(classes.dialogButton,classes.delete)} onClick={() => {handleDeleteItem(product.id)}} >Delete</Button>
           </Box>
         </Box>
       </Dialog>
