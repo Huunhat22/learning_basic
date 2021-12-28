@@ -10,7 +10,7 @@ import ProductDescription from '../components/ProductDescription';
 import ProductAdditional from '../components/ProductAdditional';
 import ProductReviews from '../components/ProductReviews';
 import { useDispatch } from 'react-redux';
-import { addToCard } from 'Features/Cart/cartSlice';
+import { addToCard, showMiniCart } from 'Features/Cart/cartSlice';
 
 
 DetailPage.propTypes = {
@@ -76,6 +76,7 @@ function DetailPage(props) {
 
         });
         dispatch(action);
+        dispatch(showMiniCart());
     }
 
     return (
