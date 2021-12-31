@@ -123,15 +123,6 @@ export default function Header() {
             <Button color="inherit">State Exvercise</Button>
           </NavLink>
 
-          <IconButton
-            aria-label="show new notifications"
-            color="inherit"
-            onClick={handleGoToCart}
-          >
-            <Badge badgeContent={quantity} color="error">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
 
           {/* Bài 109: hiển thị tùy chỉnh khi đang nhập đăng kí, Nếu chưa đăng nhập !isLoggedIn thì hiển thị Login*/}
           {!isLoggedIn && (
@@ -144,6 +135,16 @@ export default function Header() {
               <AccountCircle />
             </IconButton>
           )}
+
+          <IconButton
+            aria-label="show new notifications"
+            color="inherit"
+            onClick={handleGoToCart}
+          >
+            <Badge badgeContent={quantity} color="error">
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
 
         </Toolbar>
       </AppBar>
@@ -169,6 +170,7 @@ export default function Header() {
         <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
         <MenuItem onClick={handlelogoutClick}>Logout</MenuItem>
       </Menu>
+      
       {/* Khi nhấn vào button Login thì sẽ show ra dialog này */}
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" disableEscapeKeyDown>
         <IconButton className={classes.closeButton} onClick={handleClose}>
