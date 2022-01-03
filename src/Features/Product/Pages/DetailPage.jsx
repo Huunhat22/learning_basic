@@ -1,16 +1,16 @@
 import { Box, Container, Grid, LinearProgress, makeStyles, Paper } from '@material-ui/core';
+import { addToCard, showMiniCart } from 'Features/Cart/cartSlice';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Switch, useRouteMatch } from 'react-router';
 import AddToCardForm from '../components/AddToCardForm';
+import ProductAdditional from '../components/ProductAdditional';
+import ProductDescription from '../components/ProductDescription';
 import ProducThumbnail from '../components/ProducThumbnail';
 import ProductInfo from '../components/ProductInfo';
 import ProductMenu from '../components/ProductMenu';
-import useProductDetail from '../hook/useProductDetail';
-import ProductDescription from '../components/ProductDescription';
-import ProductAdditional from '../components/ProductAdditional';
 import ProductReviews from '../components/ProductReviews';
-import { useDispatch } from 'react-redux';
-import { addToCard, showMiniCart } from 'Features/Cart/cartSlice';
+import useProductDetail from '../hook/useProductDetail';
 
 
 DetailPage.propTypes = {
