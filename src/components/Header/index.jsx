@@ -1,4 +1,4 @@
-import { Badge, Box, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Badge, Box, ClickAwayListener, IconButton, Menu, MenuItem, Paper } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,6 +11,7 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import Login from 'Features/Auth/components/Login';
 import Register from 'Features/Auth/components/Register';
 import { logout } from 'Features/Auth/userSlice';
+import { hideMiniCart, showMiniCart } from 'Features/Cart/cartSlice';
 import { cartItemsCountSelector } from 'Features/Cart/selectors';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,7 +39,49 @@ const useStyles = makeStyles((theme) => ({
     right: theme.spacing(1),
     color: theme.palette.grey[500],
     zIndex: 1,
+  },
+
+  miniCart: {
+    position:'absolute',
+    top: '70px',
+    right: '30px',
+    display:'block',
+
+    '&:before': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      top: 0,
+      right: 14,
+      width: 10,
+      height: 10,
+      backgroundColor:'inherit',
+      transform: 'translateY(-50%) rotate(45deg)',
+      zIndex: 0,
+    },
+  },
+
+  miniBox: {
+    padding: theme.spacing(2),
+
+    '& > p':{
+      marginBottom:theme.spacing(1),
+    }
+  },
+
+  miniButton: {
+    width: '100%',
+    backgroundColor:'rgb(255, 66, 78)',
+    color: '#fff',
+    textTransform: 'none',
+
+    '& :hover': {
+      backgroundColor: 'rgb(255, 15, 30)',
+    }
   }
+
+
+
 }));
 
 // Bài 106 : tạo 1 hằng số để định nghĩa Login, Register
@@ -52,6 +95,7 @@ export default function Header() {
   const dispatch = useDispatch();
   // Bài 109: Tạo loggedInUser để nhận biết đã đăng nhập hay chưa
   const loggedInUser = useSelector(state => state.user.current)
+  const ShowMiniCart = useSelector(state => state.cart.showMiniCart)
   const isLoggedIn = !!loggedInUser.id;
 
   // Bài 106: tạo State để phân biệt khi nào là đăng nhập,đang kí
@@ -62,6 +106,9 @@ export default function Header() {
 
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [openMiniCart, setOpenMiniCart] = useState(ShowMiniCart);
+
+  console.log(typeof(openMiniCart), openMiniCart);
 
   // Bài 159: sử dụng useSelector để đẻ lấy quantity từ custom Selector, sử dụng useHistory() để đẩy vào url
   const quantity = useSelector(cartItemsCountSelector)
@@ -98,7 +145,16 @@ export default function Header() {
   // Bài 159: handleGoToCart
   const handleGoToCart = () => {
     history.push('/Cart');
-  }
+    dispatch(hideMiniCart());
+  };
+
+  const handleClickAway = () => {
+    dispatch(hideMiniCart());
+  };
+  
+  const handleClick = () => {
+    dispatch(showMiniCart());
+  };
 
   return (
     <div className={classes.root}>
@@ -136,15 +192,16 @@ export default function Header() {
             </IconButton>
           )}
 
-          <IconButton
-            aria-label="show new notifications"
-            color="inherit"
-            onClick={handleGoToCart}
-          >
-            <Badge badgeContent={quantity} color="error">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
+
+            <IconButton
+              aria-label="show new notifications"
+              color="inherit"
+              onClick={handleClick}
+            >
+              <Badge badgeContent={quantity} color="error">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
 
         </Toolbar>
       </AppBar>
@@ -204,6 +261,20 @@ export default function Header() {
         </DialogContent>
 
       </Dialog>
+
+      {/* Show mini cart */}
+        
+        {ShowMiniCart ? (
+          <ClickAwayListener onClickAway={handleClickAway}>
+              <Paper className={classes.miniCart}>
+                <Box className={classes.miniBox}>
+                  <Typography>Add to cart completed</Typography>
+                  <Button className={classes.miniButton} onClick={handleGoToCart}>Go to cart</Button>
+                </Box>
+              </Paper>
+          </ClickAwayListener>
+        ) : null}
+
     </div>
   );
 }
