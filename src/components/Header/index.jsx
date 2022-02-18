@@ -16,6 +16,7 @@ import { cartItemsCountSelector } from 'Features/Cart/selectors';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useHistory } from 'react-router-dom';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   miniCart: {
-    position:'absolute',
+    position: 'absolute',
     top: '70px',
     right: '30px',
-    display:'block',
+    display: 'block',
 
     '&:before': {
       content: '""',
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
       right: 14,
       width: 10,
       height: 10,
-      backgroundColor:'inherit',
+      backgroundColor: 'inherit',
       transform: 'translateY(-50%) rotate(45deg)',
       zIndex: 0,
     },
@@ -63,20 +64,26 @@ const useStyles = makeStyles((theme) => ({
 
   miniBox: {
     padding: theme.spacing(2),
-
-    '& > p':{
-      marginBottom:theme.spacing(1),
-    }
   },
 
-  miniButton: {
+  miniGoToCart: {
     width: '100%',
-    backgroundColor:'rgb(255, 66, 78)',
+    backgroundColor: 'rgb(255, 66, 78)',
     color: '#fff',
     textTransform: 'none',
 
-    '& :hover': {
+    '&:hover': {
       backgroundColor: 'rgb(255, 15, 30)',
+    }
+  },
+
+  miniheader: {
+    marginBottom: theme.spacing(1),
+    display: 'flex',
+
+    '& > svg': {
+      marginRight: theme.spacing(1),
+      color: '#12df12',
     }
   }
 
@@ -108,7 +115,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [openMiniCart, setOpenMiniCart] = useState(ShowMiniCart);
 
-  console.log(typeof(openMiniCart), openMiniCart);
+  console.log(typeof (openMiniCart), openMiniCart);
 
   // Bài 159: sử dụng useSelector để đẻ lấy quantity từ custom Selector, sử dụng useHistory() để đẩy vào url
   const quantity = useSelector(cartItemsCountSelector)
@@ -151,7 +158,7 @@ export default function Header() {
   const handleClickAway = () => {
     dispatch(hideMiniCart());
   };
-  
+
   const handleClick = () => {
     dispatch(showMiniCart());
   };
@@ -193,15 +200,15 @@ export default function Header() {
           )}
 
 
-            <IconButton
-              aria-label="show new notifications"
-              color="inherit"
-              onClick={handleClick}
-            >
-              <Badge badgeContent={quantity} color="error">
-                <ShoppingCart />
-              </Badge>
-            </IconButton>
+          <IconButton
+            aria-label="show new notifications"
+            color="inherit"
+            onClick={handleClick}
+          >
+            <Badge badgeContent={quantity} color="error">
+              <ShoppingCart />
+            </Badge>
+          </IconButton>
 
         </Toolbar>
       </AppBar>
@@ -227,7 +234,7 @@ export default function Header() {
         <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
         <MenuItem onClick={handlelogoutClick}>Logout</MenuItem>
       </Menu>
-      
+
       {/* Khi nhấn vào button Login thì sẽ show ra dialog này */}
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" disableEscapeKeyDown>
         <IconButton className={classes.closeButton} onClick={handleClose}>
@@ -263,17 +270,20 @@ export default function Header() {
       </Dialog>
 
       {/* Show mini cart */}
-        
-        {ShowMiniCart ? (
-          <ClickAwayListener onClickAway={handleClickAway}>
-              <Paper className={classes.miniCart}>
-                <Box className={classes.miniBox}>
-                  <Typography>Add to cart completed</Typography>
-                  <Button className={classes.miniButton} onClick={handleGoToCart}>Go to cart</Button>
-                </Box>
-              </Paper>
-          </ClickAwayListener>
-        ) : null}
+
+      {ShowMiniCart ? (
+        <ClickAwayListener onClickAway={handleClickAway}>
+          <Paper className={classes.miniCart}>
+            <Box className={classes.miniBox}>
+              <Box className={classes.miniheader}>
+                <CheckCircleOutlineIcon></CheckCircleOutlineIcon>
+                <Typography>Add to cart completed</Typography>
+              </Box>
+              <Button variant='contained' className={classes.miniGoToCart} onClick={handleGoToCart}>Go to cart</Button>
+            </Box>
+          </Paper>
+        </ClickAwayListener>
+      ) : null}
 
     </div>
   );
